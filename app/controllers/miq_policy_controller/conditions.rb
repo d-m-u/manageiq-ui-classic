@@ -234,7 +234,7 @@ module MiqPolicyController::Conditions
     if x_active_tree == :condition_tree
       @condition_policies = @condition.miq_policies.sort_by { |p| p.description.downcase }
     else
-      @condition_policy = MiqPolicy.find(@sb[:node_ids][x_active_tree]["p"])
+      @condition_policy = MiqPolicy.find_by(:id => @sb[:node_ids][x_active_tree]["p"])
     end
     add_flash(_("Ruby scripts are no longer supported in expressions, please change or remove them."), :warning) if @condition.expression.exp.key?('RUBY')
   end
